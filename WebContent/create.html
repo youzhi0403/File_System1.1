@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<script type="text/javascript" src="jq/jquery.min.js"></script>
+<script type="text/javascript" src="jq/jquery.form.js"></script>
+<style>
+	.main{
+		text-align:center;
+	}
+</style>
+</head>
+
+<body onload="init()">
+	<div class="main">
+		<form id="submitForm">
+			<input type="hidden" name="createUserId" id="createUser" /> 
+			台区名称:<input type="text" name="regionName" id="regionName" onBlur="isOnly()" /><br/> 
+			制图负责人:<select name="drawUserId" id="drawSelect"></select> <br/>
+			建模负责人:<select name="modelUserId" id="modelSelect">
+			</select> <br/>
+			出报告负责人:<select name="outputUserId" id="reportSelect">
+			</select> <br/>
+			审核负责人:<select name="finishUserId" id="finishSelect">
+			</select> <br/>
+			营销数据表:<input type="file" name="file" id="upload" method="post" action=""
+				enctype="multipart/form-data" multiple="multiple" /> <br/>
+			<input type="button" onclick="createRegion()" value="提交" />
+		</form>
+	</div>
+</body>
+<script>
+	var userId;
+	function init() {
+		var str = location.search;
+		var args = getArgs(str);
+
+		userId = args.userId;
+		document.getElementById("createUser").value = userId;
+		loadSelect();
+	}
+	function loadSelect() {
+		$.post("userQuery", function(result) {
+			var drawSelect = document.getElementById("drawSelect");
+			var modelSelect = document.getElementById("modelSelect");
+			var reportSelect = document.getElementById("reportSelect");
+			var finishSelect = document.getElementById("finishSelect");
+			for (var i = 0; i < result.data.length; i++) {
+				var option = document.createElement("option");
+				option.setAttribute("value", result.data[i].id);
+				option.innerText = result.data[i].username;
+				drawSelect.appendChild(option);
+
+			}
+			for (var i = 0; i < result.data.length; i++) {
+				var option = document.createElement("option");
+				option.setAttribute("value", result.data[i].id);
+				option.innerText = result.data[i].username;
+				modelSelect.appendChild(option);
+
+			}
+			for (var i = 0; i < result.data.length; i++) {
+				var option = document.createElement("option");
+				option.setAttribute("value", result.data[i].id);
+				option.innerText = result.data[i].username;
+
+				reportSelect.appendChild(option);
+			}
+			for (var i = 0; i < result.data.length; i++) {
+				var option = document.createElement("option");
+				option.setAttribute("value", result.data[i].id);
+				option.innerText = result.data[i].username;
+				finishSelect.appendChild(option);
+			}
+
+		}, "json");
+	}
+
+	function createRegion() {
+
+		$("#submitForm").ajaxSubmit({
+			url : "regionCreate",
+			type : "POST",
+			dataType : "json",
+			headers : {
+				"ClientCallMode" : "ajax"
+			}, //可以添加请求头部
+			success : function(data) {
+
+				alert(data.data);
+				reset();
+
+			},
+			error : function(data) {
+				console.log("error：" + data);
+			}
+		});
+	}
+
+	function isOnly() {
+		var regionName = document.getElementById("regionName").value;
+		$.post("regionIsRepeat", {
+			"regionName" : regionName
+		}, function(result) {
+			if (result.code == 201) {
+				document.getElementById("regionName").value = '';
+				alert("台区重名");
+			}
+		}, "json");
+	}
+
+	function reset() {
+		document.getElementById("submitForm").reset();
+
+	}
+
+	function getArgs(str) {
+		var qs = (str.length > 0 ? str.substring(1) : ""), args = {}, items = qs.length ? qs
+				.split("&")
+				: [], item = null, name = null, value = null, i = 0, len = items.length;
+		for (i = 0; i < len; i++) {
+			item = items[i].split("=");
+			name = decodeURIComponent(item[0]);
+			value = decodeURIComponent(item[1]);//执行解码，因为中文字符串往往在传递时被编码过了
+			if (name.length)
+				args[name] = value;
+
+		}
+		return args;//args["userid"]=叶倩
+	}
+</script>
+
+</html>

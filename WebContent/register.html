@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="layui/css/layui.css">
+<script type="text/javascript" src="jq/jquery.min.js"></script>
+
+</head>
+<body>
+	<form class="layui-form">
+		<!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
+		<div class="layui-form-item">
+			<label class="layui-form-label">注册账号</label>
+			<div class="layui-input-block">
+				<input type="text" name="account" placeholder="请输入"
+					autocomplete="off" class="layui-input" id="account" onBlur = "IsOnly()">
+			</div>
+		</div>
+
+		<div class="layui-form-item">
+			<label class="layui-form-label">姓名</label>
+			<div class="layui-input-block">
+				<input type="text" name="username" placeholder="请输入"
+					autocomplete="off" class="layui-input" id="username">
+			</div>
+		</div>
+
+		<div class="layui-form-item">
+			<label class="layui-form-label">密码</label>
+			<div class="layui-input-block">
+				<input type="text" name="password" placeholder="请输入"
+					autocomplete="off" class="layui-input" id="password">
+			</div>
+		</div>
+
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<button class="layui-btn" lay-submit lay-filter="*">立即提交</button>
+				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+			</div>
+		</div>
+		<!-- 更多表单结构排版请移步文档左侧【页面元素-表单】一项阅览 -->
+	</form>
+</body>
+<script src="layui/layui.js"></script>
+<script>
+	layui.use('form', function() {
+		var form = layui.form;
+		var $ = layui.jquery;
+
+		//各种基于事件的操作，下面会有进一步介绍
+		form.on('submit(*)', function(data) {
+			console.log(data);
+			login(data);
+			return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+		});
+		
+		function login(data){
+			$.post(
+				"register",
+				{"account":data.field.account,"password":data.field.password,"username":data.field.username},
+				function(result){
+					alert(result.data);
+				},
+				"json"
+			);
+		}
+	});
+	
+	/* 注册账号唯一性判断 */
+	function IsOnly(){
+		var account = document.getElementById("account").value;
+		$.post(
+			"userIsRepeat",
+			{"account":account},
+			function(result){
+				if(result.code == 201){
+					document.getElementById("account").value = '';
+					alert("账号重名");
+				}
+			},
+			"json"
+		);
+	}
+	
+	function reset(){
+		document.getElementById("account").value = '';
+		document.getElementById("username").value = '';
+		document.getElementById("password").value = '';
+	}
+	
+</script>
+</html>

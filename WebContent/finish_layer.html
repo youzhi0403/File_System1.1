@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="layui/css/layui.css">
+<script type="text/javascript" src="jq/jquery.min.js"></script>
+</head>
+<body onload="init()">
+	<div>
+		<button class="layui-btn layui-btn-radius"
+			onclick="downloadReportCover()">点击下载封面</button>
+		<button class="layui-btn layui-btn-radius"
+			onclick="downloadReportPicWithBG()">点击下载带底图的台区节点分布图</button>
+		<button class="layui-btn layui-btn-radius"
+			onclick="downloadReportPicWithoutBG()">点击下载不带底图的台区节点分布图</button>
+		<button class="layui-btn layui-btn-radius"
+			onclick="downloadReportExcel()">点击下载excel</button>
+	</div>
+</body>
+
+<script type="text/javascript">
+	var regionName;
+	function init() {
+		var str = location.search;
+		var args = getArgs(str);
+
+		regionName = args.regionName;
+		console.log(regionName);
+
+		$('#regionName').val(regionName);
+	}
+	function downloadReportCover() {
+		var fileType = "reportCover";
+		$.download("fileDownload", 'post', regionName, fileType);
+	}
+
+	function downloadReportPicWithBG() {
+		var fileType = "reportPicWithBG";
+		$.download("fileDownload", 'post', regionName, fileType);
+	}
+
+	function downloadReportPicWithoutBG() {
+		var fileType = "reportPicWithoutBG";
+		$.download("fileDownload", 'post', regionName, fileType);
+	}
+
+	function downloadReportExcel() {
+		var fileType = "reportExcel";
+		$.download("fileDownload", 'post', regionName, fileType);
+	}
+
+	//download方法
+	$.download = function(url, method, regionName, fileType) {
+		jQuery(
+				'<form action="'
+						+ url
+						+ '" method="'
+						+ (method || 'post')
+						+ '">'
+						+ '<input type="text" name="regionName" value="' + regionName + '"/>'
+						+ '<input type="text" name="fileType" value="' + fileType + '"/>'
+						+ '' + '</form>').appendTo('body').submit().remove();
+	}
+	
+	function getArgs(str) {
+		var qs = (str.length > 0 ? str.substring(1) : ""), args = {}, items = qs.length ? qs
+				.split("&")
+				: [], item = null, name = null, value = null, i = 0, len = items.length;
+		for (i = 0; i < len; i++) {
+			item = items[i].split("=");
+			name = decodeURIComponent(item[0]);
+			value = decodeURIComponent(item[1]);//执行解码，因为中文字符串往往在传递时被编码过了
+			if (name.length)
+				args[name] = value;
+
+		}
+		return args;//args["userid"]=叶倩
+	}
+</script>
+</html>

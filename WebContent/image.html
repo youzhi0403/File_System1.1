@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<img id="BG"/>
+</body>
+<script>
+	var str = location.search;
+	var args = getArgs(str);
+
+	var regionId = args.regionId;
+	console.log(regionId);
+	
+	var BG = document.getElementById("BG");
+	BG.setAttribute("src","123");
+	
+	function getArgs(str) {
+		var qs = (str.length > 0 ? str.substring(1) : ""), args = {}, items = qs.length ? qs
+				.split("&")
+				: [], item = null, name = null, value = null, i = 0, len = items.length;
+		for (i = 0; i < len; i++) {
+			item = items[i].split("=");
+			name = decodeURIComponent(item[0]);
+			value = decodeURIComponent(item[1]);//执行解码，因为中文字符串往往在传递时被编码过了
+			if (name.length)
+				args[name] = value;
+
+		}
+		return args;//args["userid"]=叶倩
+	}
+</script>
+</html>

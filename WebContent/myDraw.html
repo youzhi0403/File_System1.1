@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="layui/css/layui.css">
+<script type="text/javascript" src="jq/jquery.min.js"></script>
+</head>
+
+<body onload="init()">
+	<table id="demo">
+	</table>
+
+</body>
+
+<script src="layui/layui.js"></script>
+	<script type="text/html" id="toorbarDemo">
+		<button class="layui-btn layui-btn-sm" onclick="detail()">查看详情</button>
+		<button class="layui-btn layui-btn-sm" onclick="retreat()">退单</button>
+		<button class="layui-btn layui-btn-sm" onclick="turnDown()">驳回</button>
+		<button class="layui-btn layui-btn-sm" onclick="refresh()">刷新</button>
+	</script>
+
+<script>
+	var userId;
+	var table;
+	function init() {
+		var str = location.search;
+		var args = getArgs(str);
+
+		userId = args.userId;
+
+		layui.use('table', function() {
+			table = layui.table;
+
+			//第一个实例
+			table.render({
+				id : "myTable",
+				elem : '#demo',
+				"toolbar" : '#toorbarDemo',
+				url : 'regionQueryByMyDraw?userId=' + userId,
+				page : true,
+				cols : [ [ //表头
+				{
+					checkbox : true
+				}, {
+					field : 'number',
+					title : '序号',
+					width : 80,
+					sort : true,
+				}, {
+					field : 'regionName',
+					title : '台区名',
+					width : 100
+				}, {
+					field : 'createDate',
+					title : '创建时间',
+					width : 150
+				} ] ]
+			});
+
+		});
+	}
+
+	function getArgs(str) {
+		var qs = (str.length > 0 ? str.substring(1) : ""), args = {}, items = qs.length ? qs
+				.split("&")
+				: [], item = null, name = null, value = null, i = 0, len = items.length;
+		for (i = 0; i < len; i++) {
+			item = items[i].split("=");
+			name = decodeURIComponent(item[0]);
+			value = decodeURIComponent(item[1]);//执行解码，因为中文字符串往往在传递时被编码过了
+			if (name.length)
+				args[name] = value;
+
+		}
+		return args;//args["userid"]=叶倩
+	}
+
+	function retreat() {
+		var row = table.checkStatus("myTable");
+		if (row.data.length > 1 || row.data.length == 0) {
+			alert("请只选一行数据");
+			return;
+		}
+		var obj = {};
+		obj.regionId = row.data[0].id;
+		//退单,传递regionId
+		$.post("drawRetreat", obj, function(result) {
+			alert(result.data);
+			table.reload("myTable", {
+				page : {
+					curr : 1
+				}
+			});
+		}, "json");
+
+	}
+
+	function turnDown() {
+		//驳回(删除数据,删除营销数据表),传入regionId
+		var row = table.checkStatus("myTable");
+		if (row.data.length > 1 || row.data.length == 0) {
+			alert("请只选一行数据");
+			return;
+		}
+		var obj = {};
+		obj.regionId = row.data[0].id;
+		$.post("drawReject", obj, function(result) {
+			alert(result.data);
+			table.reload("myTable", {
+				page : {
+					curr : 1
+				}
+			});
+		}, "json");
+	}
+
+	function detail() {
+		//查看详情
+		var row = table.checkStatus("myTable");
+		if (row.data.length > 1 || row.data.length == 0) {
+			alert("请只选一行数据");
+			return;
+		}
+		var obj = {};
+		obj.regionName = row.data[0].regionName;
+		//打开一个iframe,将regionId作为参数进行传递
+		layui.use('layer', function() {
+			var layer = layui.layer;
+			var $ = layui.jquery;
+
+			layer.open({
+				type : 2,
+				skin : 'layui-layer-rim', //加上边框
+				area : [ '500px', '380px' ], //宽高
+				content : 'draw_layer.html?regionName=' + row.data[0].regionName,
+				btn : [ '确定' ],
+				yes : function(index, layero) {
+				}
+			});
+		});
+
+	}
+
+	function refresh(){
+		table.reload("myTable", {
+			page : {
+				curr : 1
+			}
+		});
+	}
+</script>
+
+</html>

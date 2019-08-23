@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="jq/jquery.min.js"></script>
+<script type="text/javascript" src="jq/jquery.form.js"></script>
+<style type="text/css">
+body {
+	width: 100%;
+	heigth: 100%;
+}
+
+.test_wrapper{
+	width:100%;
+	height:100%;
+	display:block;
+}
+
+.downloadDIV, .uploadDIV {
+	width: 500px;
+	heigth: 50%;
+	margin: 0 auto;
+	display:block;
+}
+
+.uploadDiv {
+	margin-top: 50px;
+}
+</style>
+</head>
+<body>
+	<div class="test_wrapper">
+		<div class="downloadDIV">
+			<a href="#">下载图片</a> <a href="#">下载jdk_jar包</a> <a href="#">下载sdk_jar包</a>
+			<a href="#">下载制图json文件</a>
+		</div>
+		<div class="uploadDIV">
+			<form id="modelUpload">
+				台区名称:<input type="text" name="regionName" id="regionName" value="" /><br />
+				.mod文件:<input type="file" multiple="multiple"
+					enctype="multipart/form-data" id="uploadFiles1" name="file" /><br />
+				.json文件:<input type="file" multiple="multiple"
+					enctype="multipart/form-data" id="uploadFiles2" name="file" />
+
+			</form>
+			<button onclick="modelSubmit()">进行提交</button>
+		</div>
+	</div>
+
+
+</body>
+
+<script type="text/javascript">
+	function modelSubmit() {
+		$("#modelUpload").ajaxSubmit({
+			url : "test",
+			type : "POST",
+			dataType : "json",
+			headers : {
+				"ClientCallMode" : "ajax"
+			}, //可以添加请求头部
+			success : function(data) {
+				alert("进入success");
+
+			},
+			error : function(data) {
+				alert("进入error");
+			}
+		});
+	}
+</script>
+</html>

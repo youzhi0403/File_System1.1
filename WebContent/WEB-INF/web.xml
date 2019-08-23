@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+	<display-name>File_System</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+
+	<!-- 统一编码的过滤器 -->
+	<filter>
+		<filter-name>encodeFilter</filter-name>
+		<filter-class>cn.powerrun.filter.EncodeFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodeFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	
+	<!-- 获取指定路径的文件和文件夹 -->
+	<servlet>
+		<servlet-name>fileListServlet</servlet-name>
+		<servlet-class>cn.powerrun.web.FileListServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>fileListServlet</servlet-name>
+		<url-pattern>/listFile</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 添加文件夹 -->
+	<servlet>
+		<servlet-name>directoryAddServlet</servlet-name>
+		<servlet-class>cn.powerrun.web.DirectoryAddServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>directoryAddServlet</servlet-name>
+		<url-pattern>/directoryAdd</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 批量删除文件 -->
+	<servlet>
+		<servlet-name>filesDeleteServlet</servlet-name>
+		<servlet-class>cn.powerrun.web.FilesDeleteServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>filesDeleteServlet</servlet-name>
+		<url-pattern>/filesDelete</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 下载文件 -->
+	<servlet>
+		<servlet-name>filesDownloadServlet</servlet-name>
+		<servlet-class>cn.powerrun.web.FilesDownloadServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>filesDownloadServlet</servlet-name>
+		<url-pattern>/filesDownload</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 上传文件 -->
+	<servlet>
+		<servlet-name>filesUploadServlet</servlet-name>
+		<servlet-class>cn.powerrun.web.FilesUploadServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>filesUploadServlet</servlet-name>
+		<url-pattern>/filesUpload</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 创建工单 -->
+	<servlet>
+		<servlet-name>regionCreateServlet</servlet-name>
+		<servlet-class>cn.powerrun.web.RegionCreateServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>regionCreateServlet</servlet-name>
+		<url-pattern>/regionCreate</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 判断台区是否重名 -->
+	<servlet>
+		<servlet-name>regionIsRepeatServlet</servlet-name>
+		<servlet-class>cn.powerrun.web.RegionIsRepeatServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>regionIsRepeatServlet</servlet-name>
+		<url-pattern>/regionIsRepeat</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 查询所有用户 -->
+	<servlet>
+		<servlet-name>userQueryServlet</servlet-name>
+		<servlet-class>cn.powerrun.web.UserQueryServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>userQueryServlet</servlet-name>
+		<url-pattern>/userQuery</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 上传制图的结果 -->
+	<servlet>
+		<servlet-name>drawUploadServlet</servlet-name>
+		<servlet-class>cn.powerrun.web.DrawUploadServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>drawUploadServlet</servlet-name>
+		<url-pattern>/drawUpload</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 上传建模的结果 -->
+	<servlet>
+		<servlet-name>modelUploadServlet</servlet-name>
+		<servlet-class>cn.powerrun.web.ModelUploadServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>modelUploadServlet</servlet-name>
+		<url-pattern>/modelUpload</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 下载建模的结果 -->
+	<servlet>
+		<servlet-name>modelDownloadServlet</servlet-name>
+		<servlet-class>cn.powerrun.web.ModelDownloadServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>modelDownloadServlet</servlet-name>
+		<url-pattern>/modelDownload</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 上传输出报告的结果 -->
+	<servlet>
+		<servlet-name>reportUploadServlet</servlet-name>
+		<servlet-class>cn.powerrun.web.ReportUploadServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>reportUploadServlet</servlet-name>
+		<url-pattern>/reportUpload</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 下载输出报告的结果 -->
+	<servlet>
+		<servlet-name>reportDownloadServlet</servlet-name>
+		<servlet-class>cn.powerrun.web.ReportDownloadServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>reportDownloadServlet</servlet-name>
+		<url-pattern>/reportDownload</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 确认报告无误归档 -->
+	<servlet>
+		<servlet-name>reportConfirmServlet</servlet-name>
+		<servlet-class>cn.powerrun.web.ReportConfirmServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>reportConfirmServlet</servlet-name>
+		<url-pattern>/reportConfirm</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 查询用户所责任台区 -->
+	<servlet>
+		<servlet-name>regionQueryByStatusServlet</servlet-name>
+		<servlet-class>cn.powerrun.web.RegionQueryByStatusServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>regionQueryByStatusServlet</servlet-name>
+		<url-pattern>/regionQuery</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>registerServlet</servlet-name>
+		<servlet-class>cn.powerrun.web.RegisterServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>registerServlet</servlet-name>
+		<url-pattern>/register</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>loginServlet</servlet-name>
+		<servlet-class>cn.powerrun.web.LoginServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>loginServlet</servlet-name>
+		<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>regionQueryByNotDraw</servlet-name>
+		<servlet-class>cn.powerrun.web.RegionQueryByNotDraw</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>regionQueryByNotDraw</servlet-name>
+		<url-pattern>/regionQueryByNotDraw</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>drawRobServlet</servlet-name>
+		<servlet-class>cn.powerrun.web.DrawRobServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>drawRobServlet</servlet-name>
+		<url-pattern>/drawRob</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>regionQueryByMyDraw</servlet-name>
+		<servlet-class>cn.powerrun.web.RegionQueryByMyDraw</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>regionQueryByMyDraw</servlet-name>
+		<url-pattern>/regionQueryByMyDraw</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>drawRetreatServlet</servlet-name>
+		<servlet-class>cn.powerrun.web.DrawRetreatServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>drawRetreatServlet</servlet-name>
+		<url-pattern>/drawRetreat</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>drawRejectServlet</servlet-name>
+		<servlet-class>cn.powerrun.web.DrawRejectServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>drawRejectServlet</servlet-name>
+		<url-pattern>/drawReject</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>fileDownloadServlet</servlet-name>
+		<servlet-class>cn.powerrun.web.FileDownloadServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>fileDownloadServlet</servlet-name>
+		<url-pattern>/fileDownload</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>regionQueryByNotModel</servlet-name>
+		<servlet-class>cn.powerrun.web.RegionQueryByNotModel</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>regionQueryByNotModel</servlet-name>
+		<url-pattern>/regionQueryByNotModel</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>modelRobServlet</servlet-name>
+		<servlet-class>cn.powerrun.web.ModelRobServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>modelRobServlet</servlet-name>
+		<url-pattern>/modelRob</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>regionQueryByMyModel</servlet-name>
+		<servlet-class>cn.powerrun.web.RegionQueryByMyModel</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>regionQueryByMyModel</servlet-name>
+		<url-pattern>/regionQueryByMyModel</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>modelRetreatServlet</servlet-name>
+		<servlet-class>cn.powerrun.web.ModelRetreatServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>modelRetreatServlet</servlet-name>
+		<url-pattern>/modelRetreat</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>modelRejectServlet</servlet-name>
+		<servlet-class>cn.powerrun.web.ModelRejectServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>modelRejectServlet</servlet-name>
+		<url-pattern>/modelReject</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>regionQueryByNotReport</servlet-name>
+		<servlet-class>cn.powerrun.web.RegionQueryByNotReport</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>regionQueryByNotReport</servlet-name>
+		<url-pattern>/regionQueryByNotReport</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>reportRobServlet</servlet-name>
+		<servlet-class>cn.powerrun.web.ReportRobServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>reportRobServlet</servlet-name>
+		<url-pattern>/reportRob</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>regionQueryByMyReport</servlet-name>
+		<servlet-class>cn.powerrun.web.RegionQueryByMyReport</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>regionQueryByMyReport</servlet-name>
+		<url-pattern>/regionQueryByMyReport</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>reportRetreatServlet</servlet-name>
+		<servlet-class>cn.powerrun.web.ReportRetreatServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>reportRetreatServlet</servlet-name>
+		<url-pattern>/reportRetreat</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>reportRejectServlet</servlet-name>
+		<servlet-class>cn.powerrun.web.ReportRejectServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>reportRejectServlet</servlet-name>
+		<url-pattern>/reportReject</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>userIsRepeatServlet</servlet-name>
+		<servlet-class>cn.powerrun.web.UserIsRepeatServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>userIsRepeatServlet</servlet-name>
+		<url-pattern>/userIsRepeat</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>regionQueryByFinfish</servlet-name>
+		<servlet-class>cn.powerrun.web.RegionQueryByFinfish</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>regionQueryByFinfish</servlet-name>
+		<url-pattern>/regionQueryByFinfish</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>regionFinishServlet</servlet-name>
+		<servlet-class>cn.powerrun.web.RegionFinishServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>regionFinishServlet</servlet-name>
+		<url-pattern>/regionFinish</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>finishRejectServlet</servlet-name>
+		<servlet-class>cn.powerrun.web.FinishRejectServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>finishRejectServlet</servlet-name>
+		<url-pattern>/finishReject</url-pattern>
+	</servlet-mapping>
+	
+	
+	
+	<servlet>
+		<servlet-name>testServlet</servlet-name>
+		<servlet-class>cn.powerrun.test.TestServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>testServlet</servlet-name>
+		<url-pattern>/test</url-pattern>
+	</servlet-mapping>
+	
+	
+	<!-- 获取台区的位置 -->
+	<servlet>
+		<servlet-name>regionLocationServlet</servlet-name>
+		<servlet-class>cn.powerrun.web.RegionLocationServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>regionLocationServlet</servlet-name>
+		<url-pattern>/getRegionLocation</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 获取地图 -->
+	<servlet>
+		<servlet-name>regionImageServlet</servlet-name>
+		<servlet-class>cn.powerrun.web.RegionImageServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>regionImageServlet</servlet-name>
+		<url-pattern>/getRegionImage</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>imageServlet</servlet-name>
+		<servlet-class>cn.powerrun.web.ImageServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>imageServlet</servlet-name>
+		<url-pattern>/image</url-pattern>
+	</servlet-mapping>
+	
+	
+</web-app>

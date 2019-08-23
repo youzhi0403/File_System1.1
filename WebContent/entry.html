@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html">
+	<title>登录页面</title>
+	
+	<link rel="stylesheet" type="text/css" href="css/entry.css">
+		<link rel="stylesheet" type="text/css" href="css/common.css">
+	<script src="jq/jquery.min.js"></script>
+		<script src="js/entry.js"></script>
+
+</head>
+<body style="background-color: rgb(	245,255,250); font-family: 微软雅黑;">
+	
+		
+	<div class="nav"> 
+	
+			<div class="nav_1">
+				<div id="nav_logo">
+					<a href="index.html"><img src="images/logo.png" alt="力行电气"></a>
+				</div>
+				<div class="nav_aside">
+					
+					<div id="wrap">
+						  <ul id="menu" style="margin:0; padding:0;list-style:none;">
+						    <li><a href="index.html" >网站首页</a></li>
+						 
+						    <li><a href="aboutUs.html" >企业简介</a></li>
+						    <li>
+						      <a href="contactUs.html" >联系我们</a>
+						    
+						    </li>
+						    <li><a href="productService.html" >产品服务</a></li>
+						    <li><a href="Enterprise.html" >企业动态</a></li>
+
+						  </ul> 
+						</div>
+
+					<div class="nav_3">
+						<div class="nav3_zhuce">
+							<a id="nav_zhuce" href="register.html">免费注册</a>
+						</div>
+						<div class="nav3_login">
+							<a id="nav_login" href="#" >登录</a>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+	</div>
+		<div class="middle">
+			<div class="content">
+				<div class="left"></div>
+				<div class="right">
+					<div class="righttop">登录&nbsp;
+					</div>
+							<div class="log-line">
+								<input type="text" name="user" autocomplete="off" maxlength="34" class="log-input input2"  value= "  账号/邮箱/手机号码" onfocus="if(this.value == '  账号/邮箱/手机号码') this.value = ''" onblur="if(this.value =='') this.value =  '  账号/邮箱/手机号码'" />
+								<div class="logIco logIcoCacct">&nbsp;</div>
+							</div>
+							
+							<div class="log-line">								<!-- <div class="log-txt">密码</div> -->
+								<input type="password" id="psw" name="pwd" autocomplete="newpassword" maxlength="20" class="log-input input2" value= "  密码" onfocus="if(this.value == '  密码') this.value = ''" onblur="if(this.value =='') this.value =  '  密码'" />
+								<div class="logIco">&nbsp;</div>
+							</div>
+						
+						<div class="goin1"">
+							<a href="#">忘记密码？</a>
+						</div>
+						<div class="option">
+							<div class="goin">
+								<input  type="checkbox" class="checkBox" >
+								<label class="checkItemLabel"></label>
+								<label>使用员工帐号登录</label>
+							</div>
+							
+						</div>
+						<div class="option">
+							<div class="goin">
+								<input class="checkBox" type="checkbox">
+								<label class="checkItemLabel"></label>
+								<label >自动登录</label>
+							</div>
+						</div>
+						<div id="error" class="loginBtn" >登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</body>
+</html>

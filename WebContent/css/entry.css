@@ -1,0 +1,120 @@
+.middle {
+    height: auto;
+}
+.middle .content {
+    width: 1058px;
+    margin: auto;
+}
+.middle .left {
+    width: 550px;
+    height: 534px;
+    float: left;
+    margin: 31px 100px 0 0;
+    background: url(../images/7.jpg) -344px 0 no-repeat;
+    position: relative;
+   
+}
+.middle .right {
+    font-family: "微软雅黑";
+    width: 273px;
+    height: auto;
+    padding: 30px 32px;
+    float: left;
+    background: #fff;
+    margin-top: 80px;
+    box-shadow: 0 0 6px rgba(0,0,0,.08);
+    -moz-box-shadow: 0 0 6px rgba(0,0,0,.08);
+    -webkit-box-shadow: 0 0 6px rgba(0,0,0,.08);
+}
+.righttop {
+    height: 44px;
+    line-height: 44px;
+    font-size: 18px;
+    color: rgb(60,179,113);
+}
+.log-line {
+    text-align: center;
+    margin-bottom: 15px;
+    position: relative;
+    height: 44px;
+    width: 269px;
+    border: 1px solid #fff;
+}
+.log-line .logIco {
+    position: absolute;
+    top: 7px;
+    left: 10px;
+    width: 35px;
+    height: 29px;
+    background: url(../images/house1.png)  no-repeat;
+ }
+.log-line .log-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 209px;
+    height: 38px;
+    line-height: 38px;
+    background: transparent;
+    font-size: 14px;
+    color: #c2c2c2;
+    padding: 2px 10px 2px 50px;
+    outline: 0;
+    z-index: 10;
+}
+.goin1 {
+    float: right;
+    margin-top: 4px;
+}
+.goin1 a {
+    text-decoration: none;
+    font-size: 12px;
+    color: rgb(60,179,113);
+}
+.option {
+    font-size: 14px;
+    color: #373737;
+    height: 30px;
+    line-height: 24px;
+}
+.goin {
+    float: left;
+}
+.middle .right .checkBox {
+    vertical-align: middle;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    z-index: 10;
+  
+    cursor: pointer;
+}
+.middle .right .checkBox+.checkItemLabel {
+    background: url(../images/squ.png) no-repeat;
+}
+.middle .right .checkItemLabel {
+    float: left;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    position: absolute;
+    z-index: 9;
+    margin: 5px 0 0 -19px;
+}
+label {
+    cursor: default;
+}
+.goin label {
+    vertical-align: middle;
+    margin-left: 9px;
+}
+.loginBtn {
+    float: left;
+    width: 271px;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    cursor: pointer;
+   background-color: rgba(60,179,113,.8);
+   border-radius: 4px;
+}

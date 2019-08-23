@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="layui/css/layui.css">
+<script type="text/javascript" src="jq/jquery.min.js"></script>
+<script type="text/javascript" src="jq/jquery.form.js"></script>
+</head>
+<body onload="init()">
+	<div>
+		<button class="layui-btn layui-btn-radius" onclick="downloadNorthPhoto()">点击下载图片</button>
+		<button class="layui-btn layui-btn-radius" onclick="downloadMod()">点击下载mod文件</button>
+		<button class="layui-btn layui-btn-radius" onclick="downloadJSON()">点击下载json文件</button>
+	</div>
+	<br/>
+	<br/>
+	<br/>
+	<div>
+		<form id="reportUpload">
+			台区名称:<input type="text" name="regionName" id="regionName" value="" /><br/>
+			封面:<input type="file" multiple="multiple" enctype="multipart/form-data" id="uploadFile1" name="file" /><br/>
+			带底图图片:<input type="file" multiple="multiple" enctype="multipart/form-data" id="uploadFile2" name="file" /><br/>
+			不带底图图片:<input type="file" multiple="multiple" enctype="multipart/form-data" id="uploadFile3" name="file" /><br/>
+			excel表:<input type="file" multiple="multiple" enctype="multipart/form-data" id="uploadFile4" name="file" />
+		</form>
+		<button class="layui-btn layui-btn-radius" onclick="reportSubmit()">进行提交</button>
+	</div>
+</body>
+<script type="text/javascript">
+	var regionName;
+	function init() {
+		var str = location.search;
+		var args = getArgs(str);
+
+		regionName = args.regionName;
+
+		$('#regionName').val(regionName);
+	}
+
+	function getArgs(str) {
+		var qs = (str.length > 0 ? str.substring(1) : ""), args = {}, items = qs.length ? qs
+				.split("&")
+				: [], item = null, name = null, value = null, i = 0, len = items.length;
+		for (i = 0; i < len; i++) {
+			item = items[i].split("=");
+			name = decodeURIComponent(item[0]);
+			value = decodeURIComponent(item[1]);//执行解码，因为中文字符串往往在传递时被编码过了
+			if (name.length)
+				args[name] = value;
+
+		}
+		return args;//args["userid"]=叶倩
+	}
+
+	function reportSubmit() {
+		$("#reportUpload").ajaxSubmit({
+			url : "reportUpload",
+			type : "POST",
+			dataType : "json",
+			headers : {
+				"ClientCallMode" : "ajax"
+			}, //可以添加请求头部
+			success : function(data) {
+				alert(data.data);
+
+			},
+			error : function(data) {
+				alert(data.data);
+			}
+		});
+	}
+
+	function downloadNorthPhoto(){
+		var fileType = "northPhoto";
+		$.download("fileDownload", 'post', regionName, fileType);
+	}
+	
+	function downloadMod(){
+		var fileType = "mod";
+		$.download("fileDownload", 'post', regionName, fileType);
+	}
+	
+	function downloadJSON(){
+		var fileType = "modelJSON";
+		$.download("fileDownload", 'post', regionName, fileType);
+	}
+	
+
+	//download方法
+	$.download = function(url, method, regionName, fileType) {
+		jQuery(
+				'<form action="'
+						+ url
+						+ '" method="'
+						+ (method || 'post')
+						+ '">'
+						+ '<input type="text" name="regionName" value="' + regionName + '"/>'
+						+ '<input type="text" name="fileType" value="' + fileType + '"/>'
+						+ '' + '</form>').appendTo('body').submit().remove();
+	}
+</script>
+</html>

@@ -1,0 +1,243 @@
+/*鍏卞悓鍩烘湰鏍囩銆佸鑸�侀〉鑴�*/
+
+*{
+  margin: 0;
+  padding: 0;
+}
+a{
+  text-decoration: none;
+  outline: 0;
+  cursor: pointer;
+}
+ul{
+	list-style:outside none none; 
+}
+li{
+	list-style: none;
+	display: list-item;
+	text-align: -weblit-match-parent;
+}
+ul,menu,dir{
+	display: block;
+    list-style-type: disc;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 40px;
+}
+body,div{
+	background-size: cover;
+}
+h3{
+	font-size: 16px;
+	line-height: 32px;
+}
+a:link,a:visited,body,html{
+	color:rgb(0,0,0);
+}
+dl {
+    display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+}
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+
+.nav{
+  margin: 0 20px;
+  position: relative;
+  font-family: '寰蒋闆呴粦'
+  font-size:15px;
+}
+.nav .nav_1{
+  width: 1070px;
+  height: 80px;
+  margin: 0 auto;
+}
+.nav .nav_1 #nav_logo {
+  width: 200px;
+  height: 80px;
+  float: left;
+}
+
+.nav .nav_1 #nav_logo a{
+  display: block;
+}
+.nav .nav_1 #nav_logo img{
+  border:0;
+
+  padding-top: 8px;
+  width: 184px;
+  height: 67px;
+
+}
+.nav a{
+  display: inline-block;
+  text-decoration: none;
+  
+}
+.nav .nav_1 .nav_aside{
+  width: 870px;
+  height: 80px;
+  float: left;
+}
+.nav .nav_1 .nav_aside ul li{
+  list-style: none;
+  float: left;
+  line-height: 80px;
+}
+.nav .nav_1 .nav_aside ul li .nav_select{
+  font-size: 16px;
+
+  color: rgb(22,150,88);
+  font-weight: bold;
+}
+.nav .nav_1 .nav_aside ul li a{
+  font-size:16px;
+  padding: 0 14px;
+}
+
+
+.nav .nav_1 .nav_aside .nav_3{
+  width: 250px;
+  height: 80px;
+  float: left;
+}
+.nav .nav_1 .nav_aside .nav_3 .nav3_zhuce,
+.nav .nav_1 .nav_aside .nav_3 .nav3_login{
+  float: left;
+}
+.nav .nav_1 .nav_aside .nav_3 #nav_zhuce
+{
+  display: block;
+  width: 130px;
+  height: 44px;
+  line-height: 44px;
+  text-align: center;
+  background-color:rgb( 60,179,113);
+  margin-top:20px;
+  margin-left:40px;
+  font-size: 15px;
+  font-family: '寰蒋闆呴粦';
+  border-radius: 5px;
+  color: #fff;   
+}
+.nav .nav_1 .nav_aside .nav_3 #nav_login{
+  display: block;
+    background-color: #fff;
+    border: 1px solid #eee;
+    width: 58px;
+    height: 44px;
+    font-size: 15px;
+    font-family: "寰蒋闆呴粦";
+    border-radius: 3px;
+    color: #333;
+    line-height: 44px;
+    text-align: center;
+    margin-top: 19px;
+    margin-left: 15px;
+}
+
+
+.clear{
+  clear: both;
+}
+.footline{
+    clear: both;
+    width: 100%;
+    border-top:1px solid #b8b8b8;
+    line-height: 0;
+    height: 0;
+}
+.line-color{
+    clear: both;
+    width: 100%;
+    border-top: 1px solid #fff;
+    line-height: 0;
+    height: 0;
+    font-size: 0;
+}
+.footer{
+    clear: both;
+    width: 100%;
+    height: 200px;
+    background-color: #ddd;
+}
+.part_one{
+ margin: 0 auto;
+ font-size: 12px;
+}
+.banner{
+    width: 100%;
+    height: 90px;
+    padding-top: 20px;
+    background-color: rgb(46,139,87);
+}
+.banner .about{
+    position: relative;
+    left: 500px;
+    display: inline-block;
+    border-radius: 5px;
+    background: rgb(22,150,88);
+    width: 100px;
+    height: 50px;
+    line-height: 48px;
+    color: rgb(255,255,255);
+    font-size: 22px;
+    text-align: center;
+}
+.on{
+  color: #000000;
+}
+
+
+body{font-size:14px;}
+
+
+a{
+  text-decoration:none;
+  color:#000;
+}
+#wrap{
+  position:relative;
+  top:28px;
+  width:876px;
+  height:34px;
+  line-height:34px;
+  margin:0 auto;
+  float: left;width: auto;
+}
+ul#menu li{
+  float:left;
+  display:block;
+  width:92px;
+  height:37px;
+  line-height:37px;
+  text-align:center;
+  margin-right:32px;
+}
+ul#menu li a:link{
+  display:block;
+  background:#ffffff;
+  font-size:14px;
+  color:#333;
+  width:92px;
+  height:37px;
+  line-height:37px;
+}
+ul#menu li a:hover,.red{
+  background:rgb( 60,179,113)!important;
+  color:#FFF!important;
+}
+

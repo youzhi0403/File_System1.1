@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>layout 后台大布局 - Layui</title>
+		<link rel="stylesheet" href="layui/css/layui.css">
+		<script type="text/javascript" src="jq/jquery.min.js"></script>
+	</head>
+
+	<body class="layui-layout-body" onload="init();">
+		<div class="layui-layout layui-layout-admin">
+			<div class="layui-header">
+				<div class="layui-logo">工作流系统</div>
+				<!-- 头部区域（可配合layui已有的水平导航） -->
+				<ul class="layui-nav layui-layout-left">
+					<li class="layui-nav-item">
+						<a href="">我的团队<span class="layui-badge">2</span></a>
+					</li>
+					<li class="layui-nav-item">
+						<a href="">输出报告子系统</a>
+					</li>
+				</ul>
+				<ul class="layui-nav layui-layout-right">
+					<li class="layui-nav-item">
+						<a href="javascript:;">
+							<img src="http://t.cn/RCzsdCq" class="layui-nav-img">陈伟杰
+						</a>
+						<dl class="layui-nav-child">
+							<dd>
+								<a href="">基本资料</a>
+							</dd>
+							<dd>
+								<a href="">安全设置</a>
+							</dd>
+						</dl>
+					</li>
+					<li class="layui-nav-item">
+						<a href="">退了</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="layui-side layui-bg-black">
+				<div class="layui-side-scroll">
+					<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+					<ul class="layui-nav layui-nav-tree" lay-filter="test">
+						<li class="layui-nav-item">
+							<a href="javascript:;" class="site-demo-active" data-url="info" data-id="info" data-title="操作说明">操作说明</a>
+						</li>
+						<li class="layui-nav-item">
+							<a href="javascript:;" class="site-demo-active" data-url="create" data-id="create" data-title="创建工单">创建工单</a>
+						</li>
+						
+						<li class="layui-nav-item">
+							<a href="javascript:;" class="site-demo-active" data-url="draw" data-id="draw" data-title="待制图台区(可抢)">待制图台区(可抢)</a>
+						</li>
+						<li class="layui-nav-item">
+							<a href="javascript:;" class="site-demo-active" data-url="myDraw" data-id="myDraw" data-title="待制图台区">待制图台区</a>
+						</li>
+						
+						<li class="layui-nav-item">
+							<a href="javascript:;" class="site-demo-active" data-url="model" data-id="model" data-title="待建模台区(可抢)">待建模台区(可抢)</a>
+						</li>
+						<li class="layui-nav-item">
+							<a href="javascript:;" class="site-demo-active" data-url="myModel" data-id="myModel" data-title="待建模台区">待建模台区</a>
+						</li>
+						
+						<li class="layui-nav-item">
+							<a href="javascript:;" class="site-demo-active" data-url="report" data-id="report" data-title="待输出报告(可抢)">待输出报告(可抢)</a>
+						</li>
+						<li class="layui-nav-item">
+							<a href="javascript:;" class="site-demo-active" data-url="myReport" data-id="myReport" data-title="待输出报告">待输出报告</a>
+						</li>
+						
+						<li class="layui-nav-item">
+							<a href="javascript:;" class="site-demo-active" data-url="finish" data-id="finish" data-title="待审核">待审核</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="layui-body">
+				<!-- 内容主体区域 -->
+				<div class="layui-tab" lay-filter="myTab" lay-allowclose="true">
+					<!--选项卡头部-->
+					<ul class="layui-tab-title">
+					</ul>
+					<!--选项卡内容-->
+					<div class="layui-tab-content">
+					</div>
+				</div>
+
+			</div>
+
+			<div class="layui-footer">
+				<!-- 底部固定区域 -->
+				© www.powerrun.com - 力行科技
+			</div>
+		</div>
+		<script src="layui/layui.js"></script>
+		<script type="text/javascript">
+		var element;
+		var $;
+			var userId;
+			var username;
+
+			function init(){
+				var str = location.search;
+				var args = getArgs(str);
+				
+				userId = args.userId;
+				username = args.username;
+				
+				$("#myName").appendTo(username);
+				
+				//先初始化模块
+				layui.use('element', function() {
+					element = layui.element;
+					$ = layui.jquery;
+
+					var active = {
+						//在这里给active绑定几项事件，后面可通过active调用这些事件
+						tabAdd: function(url, id, name) {
+							//新增一个Tab项 传入三个参数，分别对应其标题，tab页面的地址，还有一个规定的id，是标签中data-id的属性值
+							//关于tabAdd的方法所传入的参数可看layui的开发文档中基础方法部分
+							element.tabAdd('myTab', {
+								title: name,
+								content: '<iframe data-frameid="' + id + '" scrolling="auto" frameborder="0" src="' + url + '.html?time='+new Date().getTime()+'&userId='+userId+'" style="width:100%;height:100%;"></iframe>',
+								id: id //规定好的id
+							})
+						},
+						tabChange: function(id) {
+							//切换到指定Tab项
+							element.tabChange('myTab', id); //根据传入的id传入到指定的tab项
+						},
+						tabDelete: function(id) {
+							element.tabDelete("myTab", id); //删除
+						}
+					};
+
+					//当点击有site-demo-active属性的标签时，即左侧菜单栏中内容 ，触发点击事件
+					$('.site-demo-active').on('click', function() {
+						var dataid = $(this);
+
+						//这时会判断右侧.layui-tab-title属性下的有lay-id属性的li的数目，即已经打开的tab项数目
+						if($(".layui-tab-title li[lay-id]").length <= 0) {
+							//如果比零小，则直接打开新的tab项
+							active.tabAdd(dataid.attr("data-url"), dataid.attr("data-id"), dataid.attr("data-title"));
+						} else {
+							//否则判断该tab项是否以及存在
+
+							var isData = false; //初始化一个标志，为false说明未打开该tab项 为true则说明已有
+							$.each($(".layui-tab-title li[lay-id]"), function() {
+								//如果点击左侧菜单栏所传入的id 在右侧tab项中的lay-id属性可以找到，则说明该tab项已经打开
+								if($(this).attr("lay-id") == dataid.attr("data-id")) {
+									isData = true;
+								}
+							})
+							if(isData == false) {
+								//标志为false 新增一个tab项
+								active.tabAdd(dataid.attr("data-url"), dataid.attr("data-id"), dataid.attr("data-title"));
+							}
+						}
+						//最后不管是否新增tab，最后都转到要打开的选项页面上
+						active.tabChange(dataid.attr("data-id"));
+
+						FrameWH();
+					});
+
+					function FrameWH() {
+						var h = $(window).height() - 41 - 10 - 60 - 10 - 44 - 10;
+						$("iframe").css("height", 900 + "px");
+					}
+					
+					
+
+				});
+				
+			}
+			
+			function getArgs(str){
+			    var qs = (str.length>0 ? str.substring(1):""),
+			    args = {},
+			    items = qs.length ? qs.split("&") : [],
+			    item = null,
+			    name = null,
+			    value = null,
+			    i=0,
+			    len = items.length;
+			    for(i=0;i<len;i++){
+			        item = items[i].split("=");
+			        name = decodeURIComponent(item[0]);
+			        value = decodeURIComponent(item[1]);//执行解码，因为中文字符串往往在传递时被编码过了
+			        if(name.length)
+			            args[name]=value;
+			 
+			    }
+			    return args;//args["userid"]=叶倩
+			}
+		</script>
+
+	</body>
+
+</html>
